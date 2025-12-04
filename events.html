@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Asian Memory Project</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=10">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="AMP_Web_Logo.jpg" alt="AMP" class="logo-icon">
+                <span>Asian Memory Project</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="events.html" class="active">Events</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="requests.html">Request</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="events-section">
+            <div class="container">
+                <h2 class="page-title">OUR EVENTS</h2>
+                <p class="page-subtitle">Explore our collaborations and performances</p>
+                
+                <div class="events-grid">
+                    <!-- Studio Ghibli Event -->
+                    <a href="event-detail.html?event=studioGhibli" class="event-card-link">
+                        <div class="event-card event-card-with-image" style="background-image: url('Events/AMP_Web_Cover_Studio-Ghibli.jpg');">
+                            <div class="event-card-overlay">
+                                <h3 class="event-title">Studio Ghibli Tribute Series</h3>
+                                <p class="event-description">Austin Public Library Collaboration</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Nintendo Café Event -->
+                    <a href="event-detail.html?event=nintendoCafe" class="event-card-link">
+                        <div class="event-card event-card-with-image" style="background-image: url('Events/AMP_Web_Cover_Nintendo-Cafe.jpg');">
+                            <div class="event-card-overlay">
+                                <h3 class="event-title">Nintendo Café</h3>
+                                <p class="event-description">Austin Public Library Collaboration</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- AMP x AARC Event -->
+                    <a href="event-detail.html?event=aarc" class="event-card-link">
+                        <div class="event-card event-card-with-image" style="background-image: url('Events/AMP_Web_Cover_AARC.jpg');">
+                            <div class="event-card-overlay">
+                                <h3 class="event-title">AMP x AARC</h3>
+                                <p class="event-description">Asian American Resource Center Collaboration</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- AMP x GAAACC Event - No image -->
+                    <a href="event-detail.html?event=gaaacc" class="event-card-link">
+                        <div class="event-card">
+                            <h3 class="event-title">AMP x GAAACC</h3>
+                            <p class="event-description">Greater Austin Asian American Chamber of Commerce Collaboration</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Asian Memory Project. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="events.js"></script>
+</body>
+</html>

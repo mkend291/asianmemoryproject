@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REQUEST - Asian Memory Project</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="AMP_Web_Logo.jpg" alt="AMP" class="logo-icon">
+                <span>Asian Memory Project</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="requests.html" class="active">Request</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h2 class="page-title">REQUEST</h2>
+                <div class="request-options">
+                    <p class="page-subtitle">Choose from the following options below. We offer a variety of services to meet your needs:</p>
+                    <div class="request-cards-grid">
+                        <div class="request-card">
+                            <h3>Book the Ensemble</h3>
+                            <p>Invite us to perform at your event, concert, or special occasion. We tailor our repertoire and ensemble size to fit your needs.</p>
+                        </div>
+                        <div class="request-card">
+                            <h3>Commission an Arrangement or Original Work</h3>
+                            <p>Request a custom arrangement or a new original piece for your ensemble. We specialize in Asian and Asian American music, but can work in any style.</p>
+                        </div>
+                        <div class="request-card">
+                            <h3>Request Sheet Music</h3>
+                            <p>Obtain sheet music for our existing arrangements or original works for your own group to perform.</p>
+                        </div>
+                        <div class="request-card">
+                            <h3>Other Requests</h3>
+                            <p>Have a unique idea or inquiry? Let us know and we’ll be happy to discuss!</p>
+                        </div>
+                    </div>
+                </div>
+                <form id="requestForm" class="request-form">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Request Type</label>
+                        <select id="type" name="type" required>
+                            <option value="">Select...</option>
+                            <option value="booking">Book the Ensemble</option>
+                            <option value="commission">Commission Arrangement/Original Work</option>
+                            <option value="sheetmusic">Request Sheet Music</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="details">Details / Message</label>
+                        <textarea id="details" name="details" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="about-btn">Send Request</button>
+                </form>
+                <div id="formStatus" style="margin-top:2rem;"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Asian Memory Project. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+    // Open mail app with pre-filled email
+    document.getElementById('requestForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const form = e.target;
+        const name = encodeURIComponent(form.name.value);
+        const email = encodeURIComponent(form.email.value);
+        const type = encodeURIComponent(form.type.value);
+        const details = encodeURIComponent(form.details.value);
+        const mailto = `mailto:asianmemoryproject@gmail.com?subject=Request: ${type}&body=Name: ${name}%0AEmail: ${email}%0AType: ${type}%0ADetails: ${details}`;
+        window.location.href = mailto;
+    });
+    </script>
+</body>
+</html>
