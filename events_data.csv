@@ -1,19 +1,20 @@
-event_id,title,subtitle,date,location,team_members,youtube_videos,description,links,cover_image
-studioGhibli,Studio Ghibli Tribute Series,Austin Public Library Collaboration,Summer 2022,Austin Public Library and Branches,Full list available on the Events page.,https://youtube.com/playlist?list=PLIHYGUgW_85tayZBbHNc5ZaP-OkFXrHr-&si=eunWIuKwACbipU32,"Details about the AMP x APL collaboration event will go here. Add description, date, location, and other relevant information.","[
+event_id,title,subtitle,sortDate,displayDate,location,team_members,youtube_videos,description,links,cover_image,gallery_prefix,gallery_count
+studioGhibli,Studio Ghibli Tribute Series,Austin Public Library Collaboration,5/1/22,Summer 2022,Austin Public Library and Branches,Full list available on the Events page.,https://youtube.com/playlist?list=PLIHYGUgW_85tayZBbHNc5ZaP-OkFXrHr-&si=eunWIuKwACbipU32,"Details about the AMP x APL collaboration event will go here. Add description, date, location, and other relevant information.","[
   {""text"":""Studio Ghibli Tribute Performance"",""url"":""https://onedrive.live.com/?authkey=%21AMwrPz1dCzkIimQ&id=C1A0F9959249A83C%21434421&cid=C1A0F9959249A83C""},
   {""text"":""Listen to our Performances"",""url"":""https://drive.google.com/drive/folders/1VKH_fY67qKRYeMZ0Bfxk2EaM9hkzaRPI?usp=sharing""},
   {""text"":""Wonderjoy Photobooth Gallery 7.30"",""url"":""https://wonderjoyphotobooth.pic-time.com/gK5XpSeKzlYOb""},
   {""text"":""Program Notes and Poetry"",""url"":""https://drive.google.com/file/d/1g8FLDoR9AHKwF5QidE76yKKqEFovL6CW/view?usp=sharing""}
-]",Events/AMP_Web_Cover_Studio-Ghibli.jpg
-aarc,AMP x AARC,Asian American Resource Center Collaboration,28-Jan-23,"Asian American Resource Center, Austin, TX","Dorothy Le (Flute/Project Lead), Evan Schnurr (Clarinet), Brigit Fitzgerald (Bassoon), Daniel Kim (Composer/Piano)",https://youtu.be/yS5Szh5Rhkc,AMP collaborates with the Asian American Resource Center for a Lunar New Year performance of music from Animal Crossing.,"[
+]",Events/AMP_Web_Cover_Studio-Ghibli.jpg,,0
+aarc,AMP x AARC,Asian American Resource Center Collaboration,1/28/23,"January 28, 2023","Asian American Resource Center, Austin, TX","Dorothy Le (Flute/Project Lead), Evan Schnurr (Clarinet), Brigit Fitzgerald (Bassoon), Daniel Kim (Composer/Piano)",https://youtu.be/yS5Szh5Rhkc,AMP collaborates with the Asian American Resource Center for a Lunar New Year performance of music from Animal Crossing.,"[
   {""text"":""Animal Crossing: New Horizons Variations"",""url"":""https://drive.google.com/file/d/1Y8vn77_aaS8EGeoYBNxWmKRuVWr47z7k/view?usp=share_link""},
   {""text"":""Lunar New Year Makers' Market Program"",""url"":""https://drive.google.com/file/d/17W1cfYUOvD_LVZ3mZapo_YJ5qj3cnFMz/view?usp=share_link""},
   {""text"":""AMP x AARC Program Answers"",""url"":""https://drive.google.com/file/d/1UEuvzRH0UngwZRk1B7HibxWKrgUHLVXR/view?usp=share_link""}
-]",Events/AMP_Web_Cover_AARC.jpg
-gaaacc,AMP x GAAACC,Greater Austin Asian American Chamber of Commerce Collaboration,Winter 2022,"Austin, TX","Dorothy Le (Flute/Project Lead), Evan Schnurr (Clarinet), Daniel Kim (Composer/Piano)",https://youtu.be/gmrUtG6lias,AMP performs original music for the Greater Austin Asian Chamber of Commerce 10 Year Celebration event.,"[
+]",Events/AMP_Web_Cover_AARC.jpg,,0
+gaaacc,AMP x GAAACC,Greater Austin Asian American Chamber of Commerce Collaboration,12/1/22,Winter 2022,"Austin, TX","Dorothy Le (Flute/Project Lead), Evan Schnurr (Clarinet), Daniel Kim (Composer/Piano)",https://youtu.be/gmrUtG6lias,AMP performs original music for the Greater Austin Asian Chamber of Commerce 10 Year Celebration event.,"[
   {""text"":""Listen - Galactic Suite"",""url"":""https://youtu.be/gmrUtG6lias""}
-]",Events/AMP_Web_Cover_GAAACC.jpg
-nintendoCafe,Nintendo Café,Austin Public Library Collaboration,27-May-23,Austin Public Library,"Dorothy Le (Flute/Project Lead), Evan Schnurr (Clarinet), Brigit Fitzgerald (Bassoon), Daniel Kim (Composer/Piano)",https://youtu.be/PAMR0Q6EtuQ?si=nfA7fZuOJcw6TW_j,AMP collaborates with the Austin Public Library to perform arrangements of various Nintendo video game music.,"[
+]",Events/AMP_Web_Cover_GAAACC.jpg,,0
+nintendoCafe,Nintendo Café,Austin Public Library Collaboration,5/27/23,"May 27, 2023",Austin Public Library,"Dorothy Le (Flute/Project Lead), Evan Schnurr (Clarinet), Brigit Fitzgerald (Bassoon), Daniel Kim (Composer/Piano)",https://youtu.be/PAMR0Q6EtuQ?si=nfA7fZuOJcw6TW_j,AMP collaborates with the Austin Public Library to perform arrangements of various Nintendo video game music.,"[
   {""text"":""Nintendo Cafe Program"",""url"":""https://drive.google.com/file/d/1D-LwDgEKmtUWx71PnYF0HmZmbF6W0VbS/view?usp=sharing""}
-]",Events/AMP_Web_Cover_Nintendo-Cafe.jpg
-frieren,Frieren / Evergarden,Music of Evan Call,Spring 2026,TBA,TBA,,Music of Evan Call,[],Events/AMP_Web_Cover_Frieren.jpg
+]",Events/AMP_Web_Cover_Nintendo-Cafe.jpg,,0
+frieren,Frieren / Evergarden,Music of Evan Call,4/1/26,Spring 2026,TBA,TBA,,Music of Evan Call,[],Events/AMP_Web_Cover_Frieren.jpg,,0
+lightbox,AMP x APL Lightbox Panel Exhibit,Austin Public Library Collaboration,5/1/22,May 2022 - May 2024,Austin Public Library,"Pranav Subramanian (Designer), Maya Hazarika (Designer)",,"AMP collaborates with the Austin Public Library to design, create, and exhibit Lightbox Panels.",[],Events/AMP_Web_APL-Lightbox-1.jpg,AMP_Web_APL-Lightbox,3

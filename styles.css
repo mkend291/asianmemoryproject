@@ -1,3 +1,80 @@
+/* Event Section Titles Consistency */
+.event-gallery-section h2,
+.event-links-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+}
+/* Event Gallery Styles */
+.event-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 32px;
+    padding: 0 8px;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .event-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .event-gallery {
+        grid-template-columns: 1fr;
+    }
+}
+}
+
+@media (max-width: 900px) {
+    .event-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .event-gallery {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.gallery-image.card {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    display: block;
+    background: #f8f8f8;
+    padding: 0;
+}
+
+.gallery-image.card:hover {
+    transform: scale(1.04);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+}
+
+.gallery-image.card img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    border-radius: 12px;
+}
+/* Ensure event card links are always clickable */
+.event-card-link {
+    display: block;
+    cursor: pointer;
+}
+.event-card-link * {
+    pointer-events: none;
+}
 /* === MOBILE RESPONSIVE === */
 @media (max-width: 600px) {
     .container {

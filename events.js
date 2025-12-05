@@ -104,15 +104,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const rows = parseCSV(csv);
             const headers = rows[0];
-            const events = rows.slice(1).filter(r => r.length === headers.length).map(values => {
+            const events = rows.slice(1).map(values => {
                 let obj = {};
-                headers.forEach((h, idx) => obj[h.trim()] = (values[idx] || '').replace(/^"|"$/g, ''));
+                headers.forEach((h, idx) => {
+                    // If value is missing, set as empty string
+                    obj[h.trim()] = (values[idx] !== undefined ? values[idx] : '').replace(/^"|"$/g, '');
+                });
                 return obj;
             });
 
             const now = new Date();
             events.forEach(event => {
-                const eventDate = parseEventDate(event.date);
+                const eventDate = parseEventDate(event.sortDate);
                 const card = document.createElement('a');
                 card.className = 'event-card-link';
                 card.href = event.event_id ? `event-detail.html?event=${event.event_id}` : '#';
@@ -135,7 +138,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     cardInner.innerHTML = `<h3 class=\"event-title\">${title}</h3><p class=\"event-description\">${subtitle}</p>`;
                 }
                 card.appendChild(cardInner);
-                if (eventDate && eventDate > now) {
+                // If sortDate is missing or invalid, treat as past event
+                if (eventDate && !isNaN(eventDate.getTime()) && eventDate > now) {
                     upcomingGrid.appendChild(card);
                 } else {
                     pastGrid.appendChild(card);

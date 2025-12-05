@@ -55,18 +55,22 @@ function parseEventCSV(csvText, targetId) {
     // Parse each line
     for (let i = 1; i < lines.length; i++) {
         const values = parseCSVLine(lines[i]);
-        if (values.length >= 10 && values[0] === targetId) {
+            // Only match if event_id matches, regardless of extra columns
+            if (values.length > 0 && values[0] === targetId) {
             return {
-                id: values[0],
-                title: values[1],
-                subtitle: values[2],
-                date: values[3],
-                location: values[4],
-                team_members: values[5],
-                youtube_videos: values[6],
-                description: values[7],
-                links: JSON.parse(values[8]),
-                cover_image: values[9]
+                id: values[0] || '',
+                title: values[1] || '',
+                subtitle: values[2] || '',
+                sortDate: values[3] || '',
+                displayDate: String(values[4] || ''),
+                location: values[5] || '',
+                team_members: values[6] || '',
+                youtube_videos: values[7] || '',
+                description: values[8] || '',
+                links: values[9] ? JSON.parse(values[9]) : [],
+                cover_image: values[10] || '',
+                gallery_prefix: values[11] || '',
+                gallery_count: values[12] || ''
             };
         }
     }
@@ -101,6 +105,31 @@ function parseCSVLine(line) {
 }
 
 function displayEventDetails(event) {
+        // Gallery section: try .jpg, .jpeg, .png for each index
+        let galleryHTML = '';
+        if (event.gallery_count && parseInt(event.gallery_count) > 0 && event.gallery_prefix) {
+            const count = parseInt(event.gallery_count);
+            const prefix = event.gallery_prefix;
+            const extensions = ['jpg', 'jpeg', 'png'];
+            let images = '';
+            for (let i = 1; i <= count; i++) {
+                for (const ext of extensions) {
+                    const fileName = `Events/${prefix}${i}.${ext}`;
+                    images += `<div class=\"gallery-image\"><img src=\"${fileName}\" alt=\"Gallery ${i}\" onerror=\"this.style.display='none'\"></div>`;
+                }
+            }
+            if (!images.trim()) {
+                images = '<div class="gallery-placeholder">No gallery images found for this event.</div>';
+            }
+            galleryHTML = `
+                <div class=\"event-gallery-section\">
+                    <h2>Event Gallery</h2>
+                    <div class=\"event-gallery-grid\">
+                        ${images}
+                    </div>
+                </div>
+            `;
+        }
     const container = document.getElementById('event-content');
     
     // Helper function to extract video ID from YouTube URL
@@ -160,16 +189,20 @@ function displayEventDetails(event) {
     }
     
     let linksHTML = '';
-    event.links.forEach(link => {
-        linksHTML += `
-            <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="event-detail-link">
-                <span>${link.text}</span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </a>
-        `;
-    });
+    if (event.links && event.links.length > 0) {
+        event.links.forEach(link => {
+            linksHTML += `
+                <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="event-detail-link">
+                    <span>${link.text}</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            `;
+        });
+    } else {
+        linksHTML = '<div class="event-placeholder">No event resources found for this event.</div>';
+    }
     
     container.innerHTML = `
         ${youtubeHTML}
@@ -177,17 +210,10 @@ function displayEventDetails(event) {
         <h1 class="event-detail-title">${event.title}</h1>
         <p class="event-detail-subtitle">${event.subtitle}</p>
         
-
         <div class="event-info-grid">
-            ${event.date !== 'TBD' ? (() => {
-                // Format date as 'Month Day, Year'
-                let formattedDate = event.date;
-                // Try to parse date if in DD-MMM-YY or similar format
-                const dateObj = new Date(event.date);
-                if (!isNaN(dateObj.getTime())) {
-                    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-                    formattedDate = dateObj.toLocaleDateString('en-US', options);
-                }
+            ${event.displayDate && event.displayDate !== 'TBD' ? (() => {
+                // Format displayDate as string
+                let formattedDate = event.displayDate;
                 return `
                     <div class="event-info-item">
                         <h3>Date</h3>
@@ -224,8 +250,57 @@ function displayEventDetails(event) {
                 ${linksHTML}
             </div>
         </div>
+        
+        <div class="event-gallery-section">
+            <h2>EVENT GALLERY</h2>
+            <div class="event-gallery-grid">
+                ${(() => {
+                    if (event.gallery_count && parseInt(event.gallery_count) > 0 && event.gallery_prefix) {
+                        const count = parseInt(event.gallery_count);
+                        const prefix = event.gallery_prefix;
+                        const extensions = ['jpg', 'jpeg', 'png'];
+                        let images = '';
+                        for (let i = 1; i <= count; i++) {
+                            for (const ext of extensions) {
+                                const fileName = `Events/${prefix}-${i}.${ext}`;
+                                images += `<div class=\"gallery-image card\" style=\"display:none;\" onclick=\"openLightbox('${fileName}')\"><img src=\"${fileName}\" alt=\"Gallery ${i}\" onload=\"this.parentElement.style.display='flex'\" onerror=\"this.parentElement.style.display='none'\"></div>`;
+                            }
+                        }
+                        if (!images.trim()) {
+                            images = '<div class="gallery-placeholder">No gallery images found for this event.</div>';
+                        }
+                        // Add lightbox modal HTML
+                        images += `
+                        <div id=\"gallery-lightbox\" style=\"display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);z-index:9999;align-items:center;justify-content:center;\" onclick=\"closeLightbox()\">
+                            <img id=\"gallery-lightbox-img\" src=\"\" style=\"max-width:90vw;max-height:90vh;border-radius:16px;box-shadow:0 4px 32px rgba(0,0,0,0.4);\">
+                        </div>
+                        `;
+                        return images;
+                    } else {
+                        return '<div class="gallery-placeholder">No gallery images found for this event.</div>';
+                    }
+                })()}
+            </div>
+        </div>
     `;
     
     // Update page title
     document.title = `${event.title} - Asian Memory Project`;
+
+    // Lightbox functions for gallery
+    window.openLightbox = function(src) {
+        const lightbox = document.getElementById('gallery-lightbox');
+        const img = document.getElementById('gallery-lightbox-img');
+        if (lightbox && img) {
+            img.src = src;
+            lightbox.style.display = 'flex';
+        }
+    }
+
+    window.closeLightbox = function() {
+        const lightbox = document.getElementById('gallery-lightbox');
+        if (lightbox) {
+            lightbox.style.display = 'none';
+        }
+    }
 }
