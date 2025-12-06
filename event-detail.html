@@ -20,6 +20,7 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="events.html" class="active">Events</a></li>
                 <li><a href="team.html">Team</a></li>
+                <li><a href="requests.html">Request</a></li>
             </ul>
         </div>
     </nav>
@@ -38,5 +39,12 @@
 
     <script src="script.js"></script>
     <script src="event-detail.js"></script>
+    <script>
+      // Remove debug width measurer if present
+      document.addEventListener('DOMContentLoaded', function() {
+        var el = document.getElementById('debug-width');
+        if (el) el.remove();
+      });
+    </script>
 </body>
 </html>
