@@ -1,16 +1,19 @@
-name,role,category,bio,image
-Dorothy Le,Flutist / Project Lead,Director,"This is a placeholder bio for team member 1. Add their background, artistic journey, and contributions to the Asian Memory Project.",
-Selina Xu,Cellist,Musicians,"This is a placeholder bio for team member 2. Add their background, artistic journey, and contributions to the Asian Memory Project.",
-Peter Le,Pianist,Musicians,"This is a placeholder bio for team member 3. Add their background, artistic journey, and contributions to the Asian Memory Project.",
+name,role,category,bio,image,status
+Dorothy Le,Flutist / Director,Director,"This is a placeholder bio for team member 1. Add their background, artistic journey, and contributions to the Asian Memory Project.",,Current
+Selina Xu,Cellist,Musicians,"This is a placeholder bio for team member 2. Add their background, artistic journey, and contributions to the Asian Memory Project.",,Previous
+Peter Le,Pianist,Musicians,"This is a placeholder bio for team member 3. Add their background, artistic journey, and contributions to the Asian Memory Project.",,Current
 Daniel Kim,Composer / Pianist,Musicians,"Daniel Kim (b. 2000) is a composer and pianist whose music features strong thematic elements and the recontextualizing of motivic material within varied textures and harmonies. He strives to create storytelling music through sweeping orchestral textures and indelible melodies. His influences span classical, film, and video game music, including Claude Debussy, John Williams, Joe Hisaishi, and Christopher Tin. 
 Daniel has written for ensembles such as the UT New Music Ensemble, the U.S. Naval Academy Band, the Illinois State University Wind Symphony, and the International Double Reed Society. 
-Daniel holds a bachelor's degree in composition from the University of Texas at Austin and a master's degree from the University of Michigan. His mentors include Bruce Pennycook, Yevgeny Sharlat, Russel Podgorsek, Donald Grantham, Michael Daugherty, and Penka Kouneva.",Headshots/AMP_Web_Headshot_Daniel-Kim.jpg
-Pranav Subramanian,Staging Designer,Designers,"This is a placeholder bio for team member 5. Add their background, artistic journey, and contributions to the Asian Memory Project.",
-Maya Hazarika,Staging Designer,Designers,"This is a placeholder bio for team member 6. Add their background, artistic journey, and contributions to the Asian Memory Project.",
-Ellen Okamura,Lead Designer,Designers,"This is a placeholder bio for team member 6. Add their background, artistic journey, and contributions to the Asian Memory Project.",
-Ansh Jain,Web Developer,Designers,"This is a placeholder bio for team member 6. Add their background, artistic journey, and contributions to the Asian Memory Project.",
-Samuel Le,Poet,Poet,"This is a placeholder bio for team member 6. Add their background, artistic journey, and contributions to the Asian Memory Project.",
-Evan Schnurr,Clarinetist,Musicians,"This is a placeholder bio for team member 6. Add their background, artistic journey, and contributions to the Asian Memory Project.",
-Brigit Fitzgerald,Bassoonist,Musicians,"This is a placeholder bio for team member 6. Add their background, artistic journey, and contributions to the Asian Memory Project.",
-Moegi Amano,Pianist,Musicians,"This is a placeholder bio for team member 6. Add their background, artistic journey, and contributions to the Asian Memory Project.",
-Jingchao Wang,Composer,Musicians,"This is a placeholder bio for team member 6. Add their background, artistic journey, and contributions to the Asian Memory Project.",
+Daniel holds a bachelor's degree in composition from the University of Texas at Austin and a master's degree from the University of Michigan. His mentors include Bruce Pennycook, Yevgeny Sharlat, Russel Podgorsek, Donald Grantham, Michael Daugherty, and Penka Kouneva.",Headshots/AMP_Web_Headshot_Daniel-Kim.jpg,Current
+Pranav Subramanian,Staging Designer,Designers,"This is a placeholder bio for team member 5. Add their background, artistic journey, and contributions to the Asian Memory Project.",,Current
+Maya Hazarika,Set Designer,Designers,"This is a placeholder bio for team member 6. Add their background, artistic journey, and contributions to the Asian Memory Project.",,Previous
+Ellen Okamura,Designer,Designers,"This is a placeholder bio for team member 6. Add their background, artistic journey, and contributions to the Asian Memory Project.",,Current
+Ansh Jain,Website Manager,Designers,"This is a placeholder bio for team member 6. Add their background, artistic journey, and contributions to the Asian Memory Project.",,Previous
+Sammy Le,Poet,Poet,"This is a placeholder bio for team member 6. Add their background, artistic journey, and contributions to the Asian Memory Project.",,Previous
+Evan Schnurr,Clarinetist,Musicians,"This is a placeholder bio for team member 6. Add their background, artistic journey, and contributions to the Asian Memory Project.",,Previous
+Brigit Fitzgerald,Bassoonist,Musicians,"This is a placeholder bio for team member 6. Add their background, artistic journey, and contributions to the Asian Memory Project.",,Previous
+Moegi Amano,Pianist,Musicians,"This is a placeholder bio for team member 6. Add their background, artistic journey, and contributions to the Asian Memory Project.",,Previous
+Jingchao Wang,Composer,Musicians,"This is a placeholder bio for team member 6. Add their background, artistic journey, and contributions to the Asian Memory Project.",,Previous
+Sarah Uy,Violinist,Musicians,,,Current
+Kupono Liu,Program Coordinator,Advisor,,,Current
+Kevin Lam,Business Consultant,Advisor,,,Previous

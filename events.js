@@ -61,7 +61,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Fetch CSV
-    fetch('events_data.csv')
+    // Add cache-busting query string to force reload
+    const cacheBuster = `?_=${Date.now()}`;
+    fetch('events_data.csv' + cacheBuster)
         .then(res => res.text())
         .then(csv => {
             // Robust CSV parser for quoted/multiline fields

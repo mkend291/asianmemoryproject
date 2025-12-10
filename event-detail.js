@@ -229,12 +229,17 @@ function displayEventDetails(event) {
                 </div>
             ` : ''}
             
-            ${event.team_members !== 'TBD' ? `
-                <div class="event-info-item">
-                    <h3>Team Members</h3>
-                    <p>${event.team_members}</p>
-                </div>
-            ` : ''}
+            ${event.team_members !== 'TBD' ? (() => {
+                // Split team members by comma and list vertically
+                const membersArr = event.team_members.split(',').map(m => m.trim()).filter(Boolean);
+                const membersHTML = membersArr.map(m => `<li>${m}</li>`).join('');
+                return `
+                    <div class="event-info-item">
+                        <h3>Team Members</h3>
+                        <ul class="event-team-list">${membersHTML}</ul>
+                    </div>
+                `;
+            })() : ''}
             
             ${event.description ? `
                 <div class="event-info-item">
