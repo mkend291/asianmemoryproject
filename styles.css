@@ -263,7 +263,7 @@
 .request-card p {
     color: #333;
 }
-}
+
 .request-card:hover {
     box-shadow: var(--glow);
     transform: translateY(-4px) scale(1.03);
@@ -1007,7 +1007,7 @@ footer {
         padding: 0.75rem 1.5rem;
         font-size: 0.9rem;
     }
-}
+
 
 /* === EVENT DETAIL PAGES === */
 .event-card-link {
