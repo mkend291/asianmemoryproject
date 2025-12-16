@@ -109,7 +109,7 @@ function displayEventDetails(event) {
         let galleryHTML = '';
             if (event.gallery_prefix) {
                 const prefix = event.gallery_prefix;
-                const extensions = ['jpg', 'jpeg', 'png'];
+                const extensions = ['jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'PNG'];
                 let images = '';
                 let found = false;
                 let i = 1;
