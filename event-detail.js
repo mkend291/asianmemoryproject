@@ -107,28 +107,37 @@ function parseCSVLine(line) {
 function displayEventDetails(event) {
         // Gallery section: try .jpg, .jpeg, .png for each index
         let galleryHTML = '';
-        if (event.gallery_count && parseInt(event.gallery_count) > 0 && event.gallery_prefix) {
-            const count = parseInt(event.gallery_count);
-            const prefix = event.gallery_prefix;
-            const extensions = ['jpg', 'jpeg', 'png'];
-            let images = '';
-            for (let i = 1; i <= count; i++) {
-                for (const ext of extensions) {
-                    const fileName = `Events/${prefix}${i}.${ext}`;
-                    images += `<div class=\"gallery-image\"><img src=\"${fileName}\" alt=\"Gallery ${i}\" onerror=\"this.style.display='none'\"></div>`;
+            if (event.gallery_prefix) {
+                const prefix = event.gallery_prefix;
+                const extensions = ['jpg', 'jpeg', 'png'];
+                let images = '';
+                let found = false;
+                let i = 1;
+                while (true) {
+                    let imageFound = false;
+                    for (const ext of extensions) {
+                        const fileName = `Events/${prefix}${i}.${ext}`;
+                        // Synchronously check if image exists by attempting to load it (will be handled by onerror in img tag)
+                        images += `<div class=\"gallery-image\"><img src=\"${fileName}\" alt=\"Gallery ${i}\" onerror=\"this.parentElement.style.display='none'\"></div>`;
+                        imageFound = true;
+                    }
+                    if (!imageFound) break;
+                    found = true;
+                    i++;
+                    // Optional: add a max limit to prevent infinite loop
+                    if (i > 100) break;
                 }
-            }
-            if (!images.trim()) {
-                images = '<div class="gallery-placeholder">No gallery images found for this event.</div>';
-            }
-            galleryHTML = `
-                <div class=\"event-gallery-section\">
-                    <h2>Event Gallery</h2>
-                    <div class=\"event-gallery-grid\">
-                        ${images}
+                if (!found) {
+                    images = '<div class="gallery-placeholder">No gallery images found for this event.</div>';
+                }
+                galleryHTML = `
+                    <div class=\"event-gallery-section\">
+                        <h2>Event Gallery</h2>
+                        <div class=\"event-gallery-grid\">
+                            ${images}
+                        </div>
                     </div>
-                </div>
-            `;
+                `;
         }
     const container = document.getElementById('event-content');
     
@@ -212,8 +221,8 @@ function displayEventDetails(event) {
         
         <div class="event-info-grid">
             ${event.displayDate && event.displayDate !== 'TBD' ? (() => {
-                // Format displayDate as string
-                let formattedDate = event.displayDate;
+                // Format displayDate as string and handle line breaks
+                let formattedDate = event.displayDate.replace(/\n/g, '<br>');
                 return `
                     <div class="event-info-item">
                         <h3>Date</h3>
@@ -225,7 +234,7 @@ function displayEventDetails(event) {
             ${event.location !== 'TBD' ? `
                 <div class="event-info-item">
                     <h3>Location</h3>
-                    <p>${event.location}</p>
+                    <p>${event.location.replace(/\n/g, '<br>')}</p>
                 </div>
             ` : ''}
             
@@ -244,7 +253,7 @@ function displayEventDetails(event) {
             ${event.description ? `
                 <div class="event-info-item">
                     <h3>Description</h3>
-                    <p>${event.description}</p>
+                        <p>${event.description.replace(/\n/g, '<br>')}</p>
                 </div>
             ` : ''}
         </div>
