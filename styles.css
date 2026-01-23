@@ -1,3 +1,55 @@
+/* Program Details Accordion Styles */
+
+/* Program Details Accordion - Event Detail Style */
+
+.event-program-details-section {
+    margin: 1.2rem 0 1.2rem 0;
+    border-radius: var(--radius-lg);
+    background: rgba(255,255,255,0.05);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    padding: 0;
+    border: 1px solid var(--border-color);
+}
+.program-details-accordion {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem 1.1rem;
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: #fff;
+    background: transparent;
+    border-bottom: 1px solid var(--border-color);
+    user-select: none;
+    transition: background 0.2s;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    min-height: 0;
+}
+.program-details-accordion:hover {
+    background: rgba(255,255,255,0.08);
+}
+.accordion-label {
+    flex: 1;
+}
+.accordion-arrow {
+    margin-left: 8px;
+    font-size: 1.1em;
+    color: #fff;
+    transition: transform 0.2s;
+}
+.program-details-content {
+    padding: 0.7rem 1.1rem;
+    font-size: 1.01rem;
+    color: #fff;
+    background: transparent;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    border-top: none;
+    line-height: 1.5;
+    word-break: break-word;
+    text-align: center;
+}
 .member-list li {
         white-space: normal;
         overflow: visible;

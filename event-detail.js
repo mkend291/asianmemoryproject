@@ -70,7 +70,8 @@ function parseEventCSV(csvText, targetId) {
                 links: values[9] ? JSON.parse(values[9]) : [],
                 cover_image: values[10] || '',
                 gallery_prefix: values[11] || '',
-                gallery_count: values[12] || ''
+                gallery_count: values[12] || '',
+                prog_name: values[13] || ''
             };
         }
     }
@@ -213,6 +214,31 @@ function displayEventDetails(event) {
         linksHTML = '<div class="event-placeholder">No event resources found for this event.</div>';
     }
     
+    let programDetailsHTML = '';
+    if (event.prog_name && event.prog_name.trim() !== '') {
+        programDetailsHTML = `
+        <div class="event-program-details-section" id="event-program-details-section" style="display:none;">
+            <div class="program-details-accordion" onclick="toggleProgramDetailsAccordion()">
+                <span class="accordion-label">Show Program Details</span>
+                <span class="accordion-arrow">&#9660;</span>
+            </div>
+            <div id="program-details-content" class="program-details-content" style="display:none;"></div>
+        </div>
+        `;
+    }
+// Make accordion toggle globally available so inline onclick works
+window.toggleProgramDetailsAccordion = function() {
+    const content = document.getElementById('program-details-content');
+    const arrow = document.querySelector('.accordion-arrow');
+    if (content && content.style.display === 'none') {
+        content.style.display = 'block';
+        if (arrow) arrow.innerHTML = '\u25B2';
+    } else if (content) {
+        content.style.display = 'none';
+        if (arrow) arrow.innerHTML = '\u25BC';
+    }
+}
+
     container.innerHTML = `
         ${youtubeHTML}
         
@@ -257,6 +283,8 @@ function displayEventDetails(event) {
                 </div>
             ` : ''}
         </div>
+
+        ${programDetailsHTML}
 
         <div class="event-links-section">
             <h2>Event Resources</h2>
@@ -315,6 +343,43 @@ function displayEventDetails(event) {
         const lightbox = document.getElementById('gallery-lightbox');
         if (lightbox) {
             lightbox.style.display = 'none';
+        }
+    }
+
+    // Program Details: fetch and display if needed
+    if (event.prog_name && event.prog_name.trim() !== '') {
+        const progBase = event.prog_name.trim();
+        const tryFiles = [`program_details/${progBase}.txt`, `program_details/${progBase}.rtf`];
+        let found = false;
+        for (const file of tryFiles) {
+            fetch(file)
+                .then(response => {
+                    if (!response.ok) throw new Error('Not found');
+                    return response.text();
+                })
+                .then(text => {
+                    let content = text;
+                    if (file.endsWith('.rtf')) {
+                        content = content.replace(/^{\\rtf1[^}]*}/, '');
+                        content = content.replace(/\{[^{}]*}/g, '');
+                        content = content.replace(/\\[a-zA-Z]+-?\d* ?/g, '');
+                        content = content.replace(/[{}]/g, '');
+                        let lines = content.split(/\\+|\n+/).map(s => s.trim()).filter(Boolean);
+                        content = lines.join('<br>');
+                    } else {
+                        let lines = content.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+                        content = lines.join('<br>');
+                    }
+                    document.getElementById('program-details-content').innerHTML = content;
+                    // Show the section if file loads
+                    const section = document.getElementById('event-program-details-section');
+                    if (section) section.style.display = '';
+                    found = true;
+                })
+                .catch(() => {
+                    // If not found, keep hidden
+                });
+            if (found) break;
         }
     }
 }
