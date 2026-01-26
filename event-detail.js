@@ -13,18 +13,27 @@ document.addEventListener('DOMContentLoaded', function() {
 async function loadEventDetails(eventId) {
     try {
         const response = await fetch('events_data.csv');
+        if (!response.ok) {
+            throw new Error('Failed to fetch events_data.csv: ' + response.status);
+        }
         const csvText = await response.text();
         const event = parseEventCSV(csvText, eventId);
-        
         if (event) {
             displayEventDetails(event);
         } else {
-            window.location.href = 'events.html';
+            showError('Event not found or CSV parsing failed.');
         }
     } catch (error) {
-        console.error('Error loading event details:', error);
-        window.location.href = 'events.html';
+        showError('Error loading event details: ' + error);
     }
+}
+
+function showError(message) {
+    const container = document.getElementById('event-content');
+    if (container) {
+        container.innerHTML = `<div style="color:red;font-weight:bold;padding:2em;">${message}</div>`;
+    }
+    console.error(message);
 }
 
 function parseEventCSV(csvText, targetId) {
@@ -52,30 +61,30 @@ function parseEventCSV(csvText, targetId) {
         lines.push(currentLine);
     }
     
-    // Parse each line
+    // Parse header row for dynamic mapping
+    if (lines.length < 2) return null;
+    const header = parseCSVLine(lines[0]);
     for (let i = 1; i < lines.length; i++) {
         const values = parseCSVLine(lines[i]);
-            // Only match if event_id matches, regardless of extra columns
-            if (values.length > 0 && values[0] === targetId) {
-            return {
-                id: values[0] || '',
-                title: values[1] || '',
-                subtitle: values[2] || '',
-                sortDate: values[3] || '',
-                displayDate: String(values[4] || ''),
-                location: values[5] || '',
-                team_members: values[6] || '',
-                youtube_videos: values[7] || '',
-                description: values[8] || '',
-                links: values[9] ? JSON.parse(values[9]) : [],
-                cover_image: values[10] || '',
-                gallery_prefix: values[11] || '',
-                gallery_count: values[12] || '',
-                prog_name: values[13] || ''
-            };
+        if (values.length > 0 && values[0] === targetId) {
+            // Map header to values
+            const event = {};
+            for (let j = 0; j < header.length; j++) {
+                event[header[j]] = values[j] || '';
+            }
+            // Special handling for links (parse JSON if present)
+            if (event.links) {
+                try {
+                    event.links = JSON.parse(event.links);
+                } catch {
+                    event.links = [];
+                }
+            } else {
+                event.links = [];
+            }
+            return event;
         }
     }
-    
     return null;
 }
 
@@ -261,6 +270,7 @@ window.toggleProgramDetailsAccordion = function() {
                 <div class="event-info-item">
                     <h3>Location</h3>
                     <p>${event.location.replace(/\n/g, '<br>')}</p>
+                        ${event.address && event.address.trim() !== '' ? `<div style="margin-top:0.2em;"><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.address)}" target="_blank" rel="noopener noreferrer" style="color:#fff;text-decoration:underline;word-break:break-all;">${event.address}</a></div>` : ''}
                 </div>
             ` : ''}
             
