@@ -10,16 +10,23 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div id="upcoming-events-banner" class="scrolling-banner"></div>
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
                 <img src="AMP_Web_Logo_V2.png" alt="AMP Logo" class="logo-icon">
             </a>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="members.html">Members</a></li>
-                <li><a href="requests.html">Request</a></li>
+                                <li><a href="index.html" class="active">Home</a></li>
+                                <li><a href="events.html">Events</a></li>
+                                <li><a href="requests.html">Request</a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropbtn">More</a>
+                                    <div class="dropdown-content">
+                                        <a href="members.html">Members</a>
+                                        <a href="music-catalog.html">Music</a>
+                                    </div>
+                                </li>
             </ul>
         </div>
     </nav>
@@ -28,7 +35,7 @@
         <section class="hero-landing">
             <div class="container">
                 <div class="landing-header">
-                    <h1 style="text-align:center; margin-bottom:1rem; font-size:4rem; font-weight:700; letter-spacing:8px;">ASIAN MEMORY PROJECT</h1>
+                    <img src="AMP_Web_Logo_V2.png" alt="AMP Logo" class="hero-logo-big" style="margin-bottom:1rem;" />
                     <div class="landing-video">
                         <div class="video-wrapper">
                             <iframe 
@@ -41,6 +48,13 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section class="events-list-section" style="margin-bottom:2.5rem;">
+            <div class="container">
+                <h2 class="section-title">UPCOMING EVENTS</h2>
+                <div id="home-upcoming-grid" class="events-grid"></div>
             </div>
         </section>
 
@@ -86,10 +100,14 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Asian Memory Project. All rights reserved.</p>
+            <p id="copyright-year">&copy; <span id="year"></span> Asian Memory Project. All rights reserved.</p>
+            <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
         </div>
     </footer>
 
     <script src="script.js"></script>
+    <script src="home-upcoming.js"></script>
 </body>
+</body>
+<script src="banner.js"></script>
 </html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUSIC CATALOG - Asian Memory Project</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="AMP_Web_Logo_V2.png" alt="AMP Logo" class="logo-icon">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="requests.html">Request</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">More</a>
+                    <div class="dropdown-content">
+                        <a href="members.html">Members</a>
+                        <a href="music-catalog.html" class="active">Music</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <section class="events-section">
+            <div class="container">
+                <h2 class="page-title">MUSIC CATALOG</h2>
+                                <div id="music-catalog-subtitle" class="music-catalog-subtitle" style="text-align:center;font-size:1.25rem;color:#e0cfff;margin-bottom:1.5rem;"></div>
+                <div style="margin-bottom:2rem;">
+                    <label for="sourceFilter" style="font-weight:600;font-size:1.1rem;letter-spacing:0.04em;">Search by Film or Game:</label>
+                    <select id="sourceFilter" style="margin-left:1em;padding:0.5em 1em;border-radius:8px;font-size:1rem;">
+                        <option value="">All</option>
+                    </select>
+                </div>
+                <div id="music-catalog-list" class="music-catalog-list"></div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <p id="copyright-year">&copy; <span id="year"></span> Asian Memory Project. All rights reserved.</p>
+            <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+    <script src="music-catalog.js"></script>
+</body>
+</html>

@@ -116,13 +116,27 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             const now = new Date();
+            // Separate upcoming and past events
+            const upcomingEvents = [];
+            const pastEvents = [];
             events.forEach(event => {
                 const eventDate = parseEventDate(event.sortDate);
+                if (eventDate && !isNaN(eventDate.getTime()) && eventDate > now) {
+                    upcomingEvents.push({ event, eventDate });
+                } else {
+                    pastEvents.push({ event, eventDate });
+                }
+            });
+
+            // Sort upcoming events by eventDate ascending (soonest first)
+            upcomingEvents.sort((a, b) => a.eventDate - b.eventDate);
+
+            // Render upcoming events
+            upcomingEvents.forEach(({ event, eventDate }) => {
                 const card = document.createElement('a');
                 card.className = 'event-card-link';
                 card.href = event.event_id ? `event-detail.html?event=${event.event_id}` : '#';
                 let cardInner;
-                // Fallbacks for missing fields
                 const title = event.title && event.title.trim() ? event.title : 'Untitled Event';
                 const subtitle = event.subtitle && event.subtitle.trim() ? event.subtitle : 'Details coming soon';
                 const cover = event.cover_image && event.cover_image.trim() ? event.cover_image : '';
@@ -132,20 +146,51 @@ document.addEventListener('DOMContentLoaded', function() {
                     cardInner.style.backgroundImage = `url('${cover}')`;
                     const overlay = document.createElement('div');
                     overlay.className = 'event-card-overlay';
-                    overlay.innerHTML = `<h3 class=\"event-title\">${title}</h3><p class=\"event-description\">${subtitle}</p>`;
+                    let overlayHTML = `<h3 class=\"event-title\">${title}</h3><p class=\"event-description\">${subtitle}</p>`;
+                    if (event.displayDate && event.displayDate.trim()) {
+                        overlayHTML += `<div class=\"event-display-date\">${event.displayDate}</div>`;
+                    }
+                    overlay.innerHTML = overlayHTML;
                     cardInner.appendChild(overlay);
                 } else {
                     cardInner = document.createElement('div');
                     cardInner.className = 'event-card';
-                    cardInner.innerHTML = `<h3 class=\"event-title\">${title}</h3><p class=\"event-description\">${subtitle}</p>`;
+                    let cardHTML = `<h3 class=\"event-title\">${title}</h3><p class=\"event-description\">${subtitle}</p>`;
+                    if (event.displayDate && event.displayDate.trim()) {
+                        cardHTML += `<div class=\"event-display-date\">${event.displayDate}</div>`;
+                    }
+                    cardInner.innerHTML = cardHTML;
                 }
                 card.appendChild(cardInner);
-                // If sortDate is missing or invalid, treat as past event
-                if (eventDate && !isNaN(eventDate.getTime()) && eventDate > now) {
-                    upcomingGrid.appendChild(card);
+                upcomingGrid.appendChild(card);
+            });
+
+            // Render past events (keep existing order)
+            pastEvents.forEach(({ event, eventDate }) => {
+                const card = document.createElement('a');
+                card.className = 'event-card-link';
+                card.href = event.event_id ? `event-detail.html?event=${event.event_id}` : '#';
+                let cardInner;
+                const title = event.title && event.title.trim() ? event.title : 'Untitled Event';
+                const subtitle = event.subtitle && event.subtitle.trim() ? event.subtitle : 'Details coming soon';
+                const cover = event.cover_image && event.cover_image.trim() ? event.cover_image : '';
+                if (cover) {
+                    cardInner = document.createElement('div');
+                    cardInner.className = 'event-card event-card-with-image';
+                    cardInner.style.backgroundImage = `url('${cover}')`;
+                    const overlay = document.createElement('div');
+                    overlay.className = 'event-card-overlay';
+                    let overlayHTML = `<h3 class=\"event-title\">${title}</h3><p class=\"event-description\">${subtitle}</p>`;
+                    overlay.innerHTML = overlayHTML;
+                    cardInner.appendChild(overlay);
                 } else {
-                    pastGrid.appendChild(card);
+                    cardInner = document.createElement('div');
+                    cardInner.className = 'event-card';
+                    let cardHTML = `<h3 class=\"event-title\">${title}</h3><p class=\"event-description\">${subtitle}</p>`;
+                    cardInner.innerHTML = cardHTML;
                 }
+                card.appendChild(cardInner);
+                pastGrid.appendChild(card);
             });
             // Add single-card class if only one card
             if (upcomingGrid.childElementCount === 1) {
