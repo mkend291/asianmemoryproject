@@ -1,3 +1,36 @@
+
+/* Homepage sticky banner and navbar */
+html, body {
+    background: var(--surface);
+}
+.header-group {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+#upcoming-events-banner.scrolling-banner {
+    position: relative;
+    width: 100vw;
+    height: 2.2em;
+    z-index: 1;
+}
+.navbar {
+    position: relative;
+    width: 100vw;
+    z-index: 2;
+}
+body {
+    /* No top padding by default */
+}
+/* Only add top padding for homepage with header-group */
+body.homepage {
+    padding-top: 6.5em;
+}
+}
 @media (max-width: 600px) {
     .event-detail-subtitle {
         font-size: 1.1rem !important;
@@ -869,10 +902,8 @@ body {
     z-index: 1000;
     border-bottom: 1px solid var(--border-color);
     backdrop-filter: blur(10px);
-    width: 100vw;
-    left: 0;
-    right: 0;
-        min-height: 40px;
+    width: 100%;
+    min-height: 40px;
 }
 
 .nav-container {
@@ -973,6 +1004,12 @@ main {
 }
 
 /* === HOME PAGE === */
+.hero > .container,
+.events-list-section > .container {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
 .hero-landing {
     padding: var(--spacing-xl) 0;
     text-align: center;
@@ -1016,8 +1053,9 @@ main {
     backdrop-filter: blur(10px);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
-    margin: 2rem;
+    margin: 2rem auto;
     box-shadow: var(--shadow-lg);
+    max-width: 900px;
 }
 
 .about-content {
@@ -1061,7 +1099,8 @@ main {
     backdrop-filter: blur(10px);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
-    margin: 2rem;
+    margin: 2rem auto;
+    max-width: 900px;
 }
 
 .social-links {
