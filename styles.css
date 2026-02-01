@@ -76,13 +76,25 @@ body.homepage {
     font-size: 1.01rem;
 }
 .music-purchase a {
-    color: var(--light-purple);
-    text-decoration: underline;
-    font-weight: 600;
-    transition: color 0.2s;
+    display: inline-block;
+    color: #fff;
+    background: linear-gradient(90deg, var(--primary-purple) 60%, var(--mid-purple) 100%);
+    text-decoration: none;
+    font-weight: 700;
+    padding: 0.6em 1.6em;
+    border-radius: 1.5em;
+    box-shadow: 0 2px 8px rgba(140,14,176,0.10);
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    font-size: 1.08rem;
+    letter-spacing: 0.03em;
+    border: none;
+    margin-top: 0.2em;
+    cursor: pointer;
 }
 .music-purchase a:hover {
-    color: var(--accent-purple);
+    background: linear-gradient(90deg, var(--accent-purple) 60%, var(--light-purple) 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px var(--glow);
 }
 .music-purchase em {
     color: #bdbdbd;
@@ -228,18 +240,24 @@ body.homepage {
     display: block;
 }
 .hero-logo-big {
-    width: 100%;
-    max-width: 460px;
-    min-width: 220px;
+    width: 80%;
+    max-width: 320px;
+    min-width: 160px;
     height: auto;
     display: block;
     border-radius: 2rem;
-    box-shadow: 0 0 32px 0 rgba(140,14,176,0.08);
+    box-shadow: 0 0 32px 0 rgba(140,14,176,0.05);
     background: none;
     border: none;
     padding: 0;
     margin: 0 auto 1.5rem auto;
     transition: box-shadow 0.2s, border 0.2s;
+    opacity: 1;
+    filter: none;
+    box-shadow:
+        0 0 32px 0 rgba(140,14,176,0.05), /* original shadow */
+        0 0 0 12px rgba(255,255,255,0.12), /* soft white outer glow */
+        0 8px 32px 0 rgba(0,0,0,0.10);    /* soft drop shadow */
 }
 .banner-link, .banner-fade .banner-link {
     color: #fff !important;
@@ -1076,7 +1094,10 @@ main {
     height: 0;
     overflow: hidden;
     border-radius: var(--radius-lg);
-    box-shadow: var(--glow);
+    box-shadow:
+        0 0 32px 0 rgba(140,14,176,0.05), /* subtle purple shadow */
+        0 0 0 12px rgba(255,255,255,0.12), /* soft white outer glow */
+        0 8px 32px 0 rgba(0,0,0,0.10);    /* soft drop shadow */
     background: #000;
     border: 1px solid var(--border-color);
     width: 100%;

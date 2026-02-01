@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Purchase link or request note
             const purchaseLink = piece[headers.find(h => h.toLowerCase().includes('purchase'))] || '';
             if (purchaseLink && purchaseLink !== '-') {
-                html += `<div class=\"music-purchase\"><a href=\"${purchaseLink}\" target=\"_blank\" rel=\"noopener noreferrer\">Purchase here</a></div>`;
+                html += `<div class=\"music-purchase\"><a href=\"${purchaseLink}\" target=\"_blank\" rel=\"noopener noreferrer\">Purchase Here</a></div>`;
             } else {
                 html += `<div class=\"music-purchase\"><em>Available upon request</em></div>`;
             }
