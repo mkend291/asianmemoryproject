@@ -1,3 +1,49 @@
+/* Highlight for event name in ticket button */
+.magic-garden-highlight {
+    color: #fffb00;
+    font-weight: 900;
+    text-shadow: 0 2px 8px #3333ff, 0 0 4px #ff00cc;
+    padding: 0 0.2em;
+    display: inline;
+}
+/* Magic Garden homepage section */
+.magic-garden-bg-section {
+    position: relative;
+    min-height: 340px;
+    width: 100%;
+    max-width: 900px;
+    margin: 2.5rem auto 2rem auto;
+    border-radius: 2rem;
+    background: url('Events/AMP_Web_Cover_Magic-Garden.jpg') center/cover no-repeat;
+    box-shadow: 0 0 32px 0 rgba(140,14,176,0.12), 0 8px 32px 0 rgba(0,0,0,0.10);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+.magic-garden-btn {
+    display: block;
+    margin-bottom: 2.5rem;
+    padding: 1.2rem 2.5rem;
+    font-size: 2.1rem;
+    font-weight: 900;
+    color: #fff;
+    background: linear-gradient(90deg, rgba(255,0,204,0.9) 0%, rgba(51,51,255,0.9) 100%), url('Events/AMP_Web_Cover_Magic-Garden.jpg') center/cover no-repeat;
+    border-radius: 1.2rem;
+    box-shadow: 0 0 32px 8px #ff00cc, 0 2px 16px rgba(0,0,0,0.18);
+    letter-spacing: 0.04em;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.2s, box-shadow 0.2s;
+    border: 3px solid #fff;
+    outline: 2px solid #3333ff;
+    outline-offset: -4px;
+    opacity: 0.9;
+}
+.magic-garden-btn:hover {
+    background: linear-gradient(90deg, #ff00cc 0%, #3333ff 100%);
+    box-shadow: 0 0 48px 12px #ff00cc, 0 4px 16px #3333ff;
+    filter: brightness(1.15) saturate(1.2);
+}
 
 /* Homepage sticky banner and navbar */
 html, body {

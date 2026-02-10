@@ -253,7 +253,7 @@ window.toggleProgramDetailsAccordion = function() {
         
         <h1 class="event-detail-title">${event.title}</h1>
         <p class="event-detail-subtitle">${event.subtitle}</p>
-        
+        ${event.ticket_link && event.ticket_link !== 'N/A' ? `<a href="${event.ticket_link}" class="magic-garden-btn" target="_blank" rel="noopener noreferrer" style="margin-top:1.2rem;margin-bottom:2.2rem;display:block;max-width:fit-content;margin-left:auto;margin-right:auto;">PURCHASE TICKETS FOR <span class="magic-garden-highlight">${event.title.toUpperCase()}</span> HERE</a>` : ''}
         <div class="event-info-grid">
             ${event.displayDate && event.displayDate !== 'TBD' ? (() => {
                 // Format displayDate as string and handle line breaks
@@ -274,6 +274,18 @@ window.toggleProgramDetailsAccordion = function() {
                 </div>
             ` : ''}
             
+            ${event.description ? `
+                <div class="event-info-item">
+                    <h3>Description</h3>
+                        <p>${event.description.replace(/\n/g, '<br>')}</p>
+                </div>
+            ` : ''}
+            ${event.ticket_info && event.ticket_info !== 'N/A' ? `
+                <div class="event-info-item">
+                    <h3>Tickets</h3>
+                    <p style="font-size:1.1rem;line-height:1.6;margin-top:0.5em;">${event.ticket_info.replace(/\n/g, '<br>')}</p>
+                </div>
+            ` : ''}
             ${event.team_members !== 'TBD' ? (() => {
                 // Split team members by comma and list vertically
                 const membersArr = event.team_members.split(',').map(m => m.trim()).filter(Boolean);
@@ -285,24 +297,33 @@ window.toggleProgramDetailsAccordion = function() {
                     </div>
                 `;
             })() : ''}
-            
-            ${event.description ? `
-                <div class="event-info-item">
-                    <h3>Description</h3>
-                        <p>${event.description.replace(/\n/g, '<br>')}</p>
-                </div>
-            ` : ''}
         </div>
 
         ${programDetailsHTML}
 
-        <div class="event-links-section">
-            <h2>Event Resources</h2>
-            <div class="event-links-grid">
-                ${linksHTML}
+        ${event.links && event.links.length > 0 ? `
+            <div class="event-links-section">
+                <h2>Event Resources</h2>
+                <div class="event-links-grid">
+                    ${linksHTML}
+                </div>
             </div>
-        </div>
-        
+        ` : ''}
+
+        ${event.faq && event.faq !== 'N/A' ? `
+            <div class="event-info-grid" style="margin-top:2.5rem;">
+                <div class="event-info-item" style="grid-column: span 2;">
+                    <h3 style="font-size:1.2rem;margin-bottom:1.2rem;">FAQ</h3>
+                    <div style="font-size:1.1rem;line-height:1.7;">
+                        ${event.faq.split(/\n(?=Q: )/).map(qa => {
+                            const parts = qa.split(/\n(?=A: )/);
+                            return `<div style="margin-bottom:1.2em;"><span style="display:block;font-weight:700;color:#fff;margin-bottom:0.2em;">${parts[0]}</span><span style="display:block;margin-left:2em;">${parts[1] ? parts[1] : ''}</span></div>`;
+                        }).join('')}
+                    </div>
+                </div>
+            </div>
+        ` : ''}
+
         <div class="event-gallery-section">
             <h2>EVENT GALLERY</h2>
             <div class="event-gallery-grid">
