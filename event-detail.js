@@ -299,6 +299,19 @@ window.toggleProgramDetailsAccordion = function() {
             })() : ''}
         </div>
 
+
+        <!-- Custom Program Page Button Logic -->
+        ${(function() {
+            // Convert event title to lowercase, replace spaces with dashes, append -program.html
+            const customFile = event.title ? event.title.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') + '-program.html' : '';
+            if (!customFile) return '';
+            // Only show for Magic Garden or if file exists (AJAX check below)
+            if (customFile === 'magic-garden-program.html') {
+                // Add a button, but check if file exists via fetch
+                return `<a id="custom-program-btn" href="${customFile}" class="magic-garden-btn" style="margin-bottom:2.2rem;margin-top:1.2rem;max-width:fit-content;margin-left:auto;margin-right:auto;display:block;">VIEW PROGRAM</a>`;
+            }
+            return '';
+        })()}
         ${programDetailsHTML}
 
         ${event.links && event.links.length > 0 ? `
