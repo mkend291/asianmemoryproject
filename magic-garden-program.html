@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+					<style>
+						.bio-slider-container {
+							position: relative;
+							max-width: 420px;
+							margin: 2.2rem auto 2.2rem auto;
+							overflow: hidden;
+						}
+						.bio-slider-track {
+							display: flex;
+							transition: transform 0.4s cubic-bezier(.4,1.3,.5,1);
+						}
+						.bio-slide {
+							min-width: 100%;
+							box-sizing: border-box;
+							padding: 1.2rem 0.5rem 1.7rem 0.5rem;
+							background: rgba(255,255,255,0.10);
+							border-radius: 1.2rem;
+							box-shadow: 0 2px 12px rgba(51,0,114,0.10);
+							text-align: center;
+						}
+						.bio-headshot {
+							width: 140px;
+							height: 140px;
+							object-fit: cover;
+							border-radius: 1.2rem;
+							margin-bottom: 1.1rem;
+							border: 3.5px solid #6ec6ff;
+							background: #eee;
+							box-shadow: 0 2px 16px #6ec6ff33;
+						}
+						.bio-name {
+							font-size: 1.18rem;
+							font-weight: 700;
+							color: #fff;
+							margin-bottom: 0.2rem;
+							letter-spacing: 0.04em;
+						}
+						.bio-role {
+							font-size: 1.01rem;
+							color: #e0d6ff;
+							font-weight: 500;
+							margin-bottom: 0.7rem;
+						}
+						.bio-desc {
+							font-size: 1.01rem;
+							color: #fff;
+							margin-bottom: 0.2rem;
+						}
+						.bio-slider-btn {
+							position: absolute;
+							top: 50%;
+							transform: translateY(-50%);
+							background: rgba(80,0,120,0.85);
+							color: #fff;
+							border: none;
+							border-radius: 50%;
+							width: 38px;
+							height: 38px;
+							font-size: 1.7rem;
+							cursor: pointer;
+							z-index: 2;
+							box-shadow: 0 2px 8px #50007833;
+							transition: background 0.2s, box-shadow 0.2s;
+						}
+						.bio-slider-btn:active {
+							background: #6ec6ff;
+							color: #500078;
+						}
+						.bio-slider-btn.left { left: 8px; }
+						.bio-slider-btn.right { right: 8px; }
+						@media (max-width: 600px) {
+							.bio-slider-container { max-width: 98vw; }
+							.bio-slide { padding: 1.1rem 0.1rem 1.2rem 0.1rem; }
+							.bio-headshot { width: 90px; height: 90px; border-radius: 0.7rem; }
+						}
+					</style>
+					<style>
+					body.magic-garden-bg .navbar {
+						background: linear-gradient(90deg, #e3f2fd 60%, #fce4ec 100%);
+						box-shadow: 0 2px 16px #b3e5fc55;
+					}
+					body.magic-garden-bg .navbar .nav-links a,
+					body.magic-garden-bg .navbar .logo-icon {
+						color: #7b3fe4 !important;
+					}
+					body.magic-garden-bg .navbar .nav-links a.active {
+						color: #43a047 !important;
+						font-weight: 700;
+					}
+					body.magic-garden-bg footer {
+						background: linear-gradient(90deg, #e3f2fd 60%, #fce4ec 100%);
+						color: #7b3fe4;
+						box-shadow: 0 -2px 16px #b3e5fc55;
+					}
+					body.magic-garden-bg footer p {
+						color: #7b3fe4;
+						font-weight: 600;
+						letter-spacing: 0.03em;
+					}
+					</style>
+				<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+				<style>
+					.magic-garden-cursive-title {
+						font-family: 'Dancing Script', cursive;
+						font-size: 4.2rem;
+						font-weight: 700;
+						color: #fff;
+						letter-spacing: 0.08em;
+						text-shadow: 0 4px 24px #500078, 0 2px 8px #000;
+						margin-bottom: 0.7rem;
+						text-align: center;
+					}
+					@media (max-width: 600px) {
+						.magic-garden-cursive-title { font-size: 2.5rem; }
+					}
+				</style>
+			<style>
+				   body.magic-garden-bg {
+					   min-height: 100vh;
+					   background: linear-gradient(rgba(200, 240, 255, 0.7), rgba(230, 210, 255, 0.5)), url('Events/AMP_Web_Cover_Magic-Garden.jpg') no-repeat center center fixed;
+					   background-size: cover;
+				   }
+			</style>
+		<style>
+			.bio-accordion .bio-card {
+				transition: box-shadow 0.2s, transform 0.2s;
+				background: rgba(255,255,255,0.07);
+				border-radius: 1rem;
+				margin-bottom: 1.1rem;
+				box-shadow: 0 1px 8px rgba(140,14,176,0.08);
+			}
+			.bio-accordion .bio-card:hover,
+			.bio-accordion .bio-card.active {
+				box-shadow: 0 4px 24px rgba(140,14,176,0.13), 0 2px 16px #3333ff33;
+				transform: scale(1.025);
+				background: rgba(80,0,120,0.13);
+			}
+			.bio-header {
+				cursor: pointer;
+			}
+			.bio-headshot {
+				transition: box-shadow 0.2s, border 0.2s;
+			}
+			.bio-card:hover .bio-headshot,
+			.bio-card.active .bio-headshot {
+				box-shadow: 0 2px 16px #6ec6ff55, 0 0 0 4px #fff;
+				border-color: #500078;
+			}
+			.bio-header:focus {
+				outline: 2px solid #6ec6ff;
+			}
+		</style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Magic Garden Program - Asian Memory Project</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body class="magic-garden-bg">
+	<nav class="navbar">
+		<div class="nav-container">
+			<a href="index.html" class="logo">
+				<img src="AMP_Web_Logo_V2.png" alt="AMP Logo" class="logo-icon">
+			</a>
+			<ul class="nav-links">
+				<li><a href="index.html">Home</a></li>
+				<li><a href="events.html" class="active">Events</a></li>
+				<li><a href="requests.html">Request</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropbtn">More</a>
+					<div class="dropdown-content">
+						<a href="members.html">Members</a>
+						<a href="music-catalog.html">Music</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<main>
+		<section class="event-detail-section">
+			<div class="container" style="max-width: 700px; margin: 0 auto;">
+				<div id="event-content">
+					   <div style="position:relative;z-index:1;">
+						   <div style="position:absolute;top:-30px;left:-40px;width:80px;height:80px;z-index:0;opacity:0.8;">
+							   <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f33c.svg' alt='blossom' style='width:100%;height:100%;'>
+						   </div>
+						   <div style="position:absolute;top:-30px;right:-40px;width:80px;height:80px;z-index:0;opacity:0.8;">
+							   <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f338.svg' alt='cherry blossom' style='width:100%;height:100%;'>
+						   </div>
+						   <div style="background:rgba(255,255,255,0.78);border-radius:2.2rem;padding:1.1rem 0.7rem 0.7rem 0.7rem;box-shadow:0 4px 32px #b3e5fc55,0 2px 8px #f8bbd033;max-width:650px;margin:0 auto 0.7rem auto;position:relative;backdrop-filter:blur(2px);">
+							   <h1 class="magic-garden-cursive-title" style="color:#7b3fe4;text-shadow:0 4px 24px #b3e5fc,0 2px 8px #fff;">Magic Garden</h1>
+							   <div class="event-detail-subtitle" style="text-align:center;color:#43a047;font-size:1.25rem;margin-bottom:0.5rem;margin-top:0;font-family:'Nunito Sans',sans-serif;letter-spacing:0.01em;">
+								   Music Performance Inspired by<br>Frieren: Beyond Journey's End &amp; Violet Evergarden
+							   </div>
+						   </div>
+					   </div>
+					   <div style="position:relative;">
+						   <div style="position:absolute;top:-50px;left:-60px;width:90px;height:90px;z-index:0;opacity:0.7;pointer-events:none;">
+							   <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f338.svg" alt="cherry blossom" style="width:100%;height:100%;">
+						   </div>
+						   <div style="position:absolute;bottom:-50px;right:-60px;width:90px;height:90px;z-index:0;opacity:0.7;pointer-events:none;">
+							   <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f33c.svg" alt="blossom" style="width:100%;height:100%;">
+						   </div>
+						   <section class="bio-section" style="background:rgba(255,255,255,0.75);box-shadow:0 2px 16px #b3e5fc66;border-radius:1.5rem;padding:1.1rem 0.3rem 1.1rem 0.3rem;margin-bottom:0.7rem;position:relative;z-index:1;">
+						   <h2 class="section-title" style="color:#7b3fe4;text-align:center;letter-spacing:0.08em;font-family:'Dancing Script',cursive;font-size:2.3rem;margin-bottom:1.2rem;z-index:1;position:relative;">Meet the Team</h2>
+						   <div class="bio-slider-container" style="background:rgba(200,240,255,0.18);border-radius:1.2rem;box-shadow:0 1px 8px #b3e5fc33;">
+							   <button class="bio-slider-btn left" onclick="slideBio(-1)" aria-label="Previous" style="background:#b3e5fc;color:#7b3fe4;box-shadow:0 2px 8px #b3e5fc66;">&#8592;</button>
+							   <div class="bio-slider-track" id="bioSliderTrack">
+									  <div class="bio-slide" style="background:rgba(255,255,255,0.85);box-shadow:0 2px 12px #b3e5fc33;border:2.5px solid #b3e5fc;">
+										  <img src="Headshots/sample1.jpg" alt="Dorothy Le headshot" class="bio-headshot" style="border:3.5px solid #7b3fe4;box-shadow:0 2px 16px #b3e5fc55;background:#e3f2fd;">
+										  <div class="bio-name" style="color:#7b3fe4;font-family:'Dancing Script',cursive;">Dorothy Le</div>
+										  <div class="bio-role" style="color:#43a047;font-family:'Nunito Sans',sans-serif;">Flute/Director</div>
+										  <div class="bio-desc" style="color:#444;font-family:'Nunito Sans',sans-serif;">Bio pending.</div>
+									  </div>
+									  <div class="bio-slide" style="background:rgba(255,255,255,0.85);box-shadow:0 2px 12px #b3e5fc33;border:2.5px solid #b3e5fc;">
+										  <img src="Headshots/sample2.jpg" alt="Sarah Uy headshot" class="bio-headshot" style="border:3.5px solid #7b3fe4;box-shadow:0 2px 16px #b3e5fc55;background:#e3f2fd;">
+										  <div class="bio-name" style="color:#7b3fe4;font-family:'Dancing Script',cursive;">Sarah Uy</div>
+										  <div class="bio-role" style="color:#43a047;font-family:'Nunito Sans',sans-serif;">Violin</div>
+										  <div class="bio-desc" style="color:#444;font-family:'Nunito Sans',sans-serif;">Bio pending.</div>
+									  </div>
+									  <div class="bio-slide" style="background:rgba(255,255,255,0.85);box-shadow:0 2px 12px #b3e5fc33;border:2.5px solid #b3e5fc;">
+										  <img src="Headshots/sample3.jpg" alt="Peter Le headshot" class="bio-headshot" style="border:3.5px solid #7b3fe4;box-shadow:0 2px 16px #b3e5fc55;background:#e3f2fd;">
+										  <div class="bio-name" style="color:#7b3fe4;font-family:'Dancing Script',cursive;">Peter Le</div>
+										  <div class="bio-role" style="color:#43a047;font-family:'Nunito Sans',sans-serif;">Piano</div>
+										  <div class="bio-desc" style="color:#444;font-family:'Nunito Sans',sans-serif;">Bio pending.</div>
+									  </div>
+									  <div class="bio-slide" style="background:rgba(255,255,255,0.85);box-shadow:0 2px 12px #b3e5fc33;border:2.5px solid #b3e5fc;">
+										  <img src="Headshots/sample4.jpg" alt="Daniel Kim headshot" class="bio-headshot" style="border:3.5px solid #7b3fe4;box-shadow:0 2px 16px #b3e5fc55;background:#e3f2fd;">
+										  <div class="bio-name" style="color:#7b3fe4;font-family:'Dancing Script',cursive;">Daniel Kim</div>
+										  <div class="bio-role" style="color:#43a047;font-family:'Nunito Sans',sans-serif;">Composer</div>
+										  <div class="bio-desc" style="color:#444;font-family:'Nunito Sans',sans-serif;">Bio pending.</div>
+									  </div>
+							   </div>
+							   <button class="bio-slider-btn right" onclick="slideBio(1)" aria-label="Next" style="background:#b3e5fc;color:#7b3fe4;box-shadow:0 2px 8px #b3e5fc66;">&#8594;</button>
+						   </div>
+						   </section>
+					   </div>
+					   <div style="position:relative;">
+						   <div style="position:absolute;top:-40px;left:-50px;width:70px;height:70px;z-index:0;opacity:0.7;pointer-events:none;">
+							   <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f33c.svg" alt="blossom" style="width:100%;height:100%;">
+						   </div>
+						   <div style="position:absolute;bottom:-40px;right:-50px;width:70px;height:70px;z-index:0;opacity:0.7;pointer-events:none;">
+							   <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f338.svg" alt="cherry blossom" style="width:100%;height:100%;">
+						   </div>
+						   <section class="program-section" style="background:rgba(255,255,255,0.78);box-shadow:0 2px 16px #b3e5fc66;border-radius:1.5rem;padding:1.1rem 0.3rem 1.1rem 0.3rem;margin-top:1.1rem;position:relative;z-index:1;backdrop-filter:blur(2px);">
+						   <h2 class="section-title" style="color:#7b3fe4;text-align:center;letter-spacing:0.08em;font-family:'Dancing Script',cursive;font-size:2.1rem;margin-bottom:1.2rem;z-index:1;position:relative;">Program</h2>
+						   <div class="program-list" style="max-width:500px;margin:0 auto;color:#7b3fe4;font-size:1.13rem;z-index:1;position:relative;">
+							   <div style="font-weight:bold;margin-top:1.2em;letter-spacing:0.04em;color:#43a047;">VIOLET EVERGARDEN</div>
+							   <ol style="margin:0 0 0 1.2em;padding:0;">
+								   <li>Theme</li>
+								   <li>Never Coming Back</li>
+								   <li>Torment</li>
+								   <li>The Ultimate Price</li>
+								   <li>Across the Violet Sky</li>
+							   </ol>
+							   <div style="text-align:center;margin:1.2em 0;opacity:0.7;color:#43a047;font-weight:600;">- INTERMISSION -</div>
+							   <div style="font-weight:bold;margin-top:1.2em;letter-spacing:0.04em;color:#43a047;">FRIEREN: BEYOND JOURNEY'S END</div>
+							   <ol start="6" style="margin:0 0 0 1.2em;padding:0;">
+								   <li>Journey of a Lifetime</li>
+								   <li>Time Flows Ever Onward</li>
+								   <li>Waltz for Stark &amp; Fern</li>
+								   <li>Fractured</li>
+								   <li>Frieren the Slayer</li>
+								   <li>Zoltraak</li>
+								   <li>Frieren Medley</li>
+							   </ol>
+						   </div>
+						   </section>
+					   </div>
+				</div>
+			</div>
+		</section>
+	<!-- Follow Us Section (Spring Theme) -->
+	<div style="position:relative;">
+		<div style="position:absolute;top:-35px;left:-40px;width:60px;height:60px;z-index:0;opacity:0.7;pointer-events:none;">
+			<img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f33c.svg" alt="blossom" style="width:100%;height:100%;">
+		</div>
+		<div style="position:absolute;bottom:-35px;right:-40px;width:60px;height:60px;z-index:0;opacity:0.7;pointer-events:none;">
+			<img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f338.svg" alt="cherry blossom" style="width:100%;height:100%;">
+		</div>
+		<section class="social-media" style="background:rgba(255,255,255,0.78);box-shadow:0 2px 16px #b3e5fc55;border-radius:1.5rem;padding:1.1rem 0.3rem 1.1rem 0.3rem;margin:1.3rem auto 0 auto;max-width:600px;position:relative;z-index:1;overflow:hidden;backdrop-filter:blur(2px);">
+		<div class="container" style="position:relative;z-index:1;">
+			<h2 class="section-title" style="color:#7b3fe4;text-align:center;letter-spacing:0.08em;font-family:'Dancing Script',cursive;font-size:1.5rem;margin-bottom:0.7rem;">Follow Us</h2>
+			<div class="social-links" style="display:flex;justify-content:center;gap:2.2rem;flex-wrap:wrap;">
+				<a href="https://instagram.com/asianmemoryproject" target="_blank" rel="noopener noreferrer" class="social-btn instagram" style="background:#fff;border-radius:1.2rem;padding:0.7rem 1.2rem;box-shadow:0 2px 8px #b3e5fc55;display:flex;align-items:center;gap:0.7rem;color:#e1306c;font-weight:600;font-size:1.1rem;text-decoration:none;transition:box-shadow 0.2s;">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" fill="currentColor"/></svg>
+					<span>Instagram</span>
+				</a>
+				<a href="https://www.facebook.com/asianmemoryproject" target="_blank" rel="noopener noreferrer" class="social-btn facebook" style="background:#fff;border-radius:1.2rem;padding:0.7rem 1.2rem;box-shadow:0 2px 8px #b3e5fc55;display:flex;align-items:center;gap:0.7rem;color:#1877f3;font-weight:600;font-size:1.1rem;text-decoration:none;transition:box-shadow 0.2s;">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="currentColor"/></svg>
+					<span>Facebook</span>
+				</a>
+				<a href="https://www.youtube.com/@AsianMemoryProject" target="_blank" rel="noopener noreferrer" class="social-btn youtube" style="background:#fff;border-radius:1.2rem;padding:0.7rem 1.2rem;box-shadow:0 2px 8px #b3e5fc55;display:flex;align-items:center;gap:0.7rem;color:#ff0000;font-weight:600;font-size:1.1rem;text-decoration:none;transition:box-shadow 0.2s;">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="currentColor"/></svg>
+					<span>YouTube</span>
+				</a>
+			</div>
+		</div>
+		</section>
+	</div>
+	</main>
+
+	<footer>
+		<div class="container">
+			<p id="copyright-year">&copy; <span id="year"></span> Asian Memory Project. All rights reserved.</p>
+		</div>
+	</footer>
+	<script src="script.js"></script>
+	<script>
+		document.getElementById('year').textContent = new Date().getFullYear();
+		let bioIndex = 0;
+		function slideBio(dir) {
+			const track = document.getElementById('bioSliderTrack');
+			const slides = track.children;
+			bioIndex += dir;
+			if (bioIndex < 0) bioIndex = slides.length - 1;
+			if (bioIndex >= slides.length) bioIndex = 0;
+			track.style.transform = `translateX(-${bioIndex * 100}%)`;
+		}
+	</script>
+</body>
+</html>
