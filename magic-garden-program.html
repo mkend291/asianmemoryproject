@@ -271,33 +271,7 @@
 						   </div>
 																						 </section>
 											 <!-- View Music PDF Button and Modal -->
-											 <div id="musicPdfModal" style="display:none;position:fixed;z-index:10000;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;">
-												 <div style="background:#fff;border-radius:1.5rem;box-shadow:0 4px 32px #b3e5fc,0 2px 8px #f8bbd0;max-width:98vw;max-height:94vh;width:700px;height:85vh;padding:1.2rem 1.2rem 1.2rem 1.2rem;display:flex;flex-direction:column;align-items:center;position:relative;">
-													 <span id="musicPdfClose" style="position:absolute;top:1.2rem;right:1.5rem;font-size:2.5rem;color:#7b3fe4;cursor:pointer;font-family:sans-serif;z-index:10001;">&times;</span>
-													 <iframe src="magic-garden-files/magic-garden_color-cover.pdf#toolbar=0&navpanes=0&scrollbar=1" style="width:100%;height:100%;border:none;" allowfullscreen></iframe>
-													   <div style="font-size:0.95rem;color:#888;margin-top:0.5em;">All scores and parts available at <a href="https://asianmemoryproject.com/music-catalog.html" target="_blank" style="color:#7b3fe4;text-decoration:underline;">asianmemoryproject.com/music-catalog.html</a></div>
-												 </div>
-											 </div>
-											 <script>
-												 // View Music PDF Modal logic
-												 document.addEventListener('DOMContentLoaded', function() {
-													 var viewBtn = document.getElementById('viewMusicBtn');
-													 var pdfModal = document.getElementById('musicPdfModal');
-													 var pdfClose = document.getElementById('musicPdfClose');
-													 viewBtn.addEventListener('click', function() {
-														 pdfModal.style.display = 'flex';
-													 });
-													 pdfClose.addEventListener('click', function() {
-														 pdfModal.style.display = 'none';
-													 });
-													 pdfModal.addEventListener('click', function(e) {
-														 if (e.target === pdfModal) pdfModal.style.display = 'none';
-													 });
-													 document.addEventListener('keydown', function(e) {
-														 if (pdfModal.style.display === 'flex' && (e.key === 'Escape' || e.key === 'Esc')) pdfModal.style.display = 'none';
-													 });
-												 });
-											 </script>
+											 <a href="magic-garden-files/magic-garden_color-cover.pdf#toolbar=0&navpanes=0&scrollbar=1" target="_blank" rel="noopener" class="magic-garden-btn" style="margin: 1.2rem auto 0.5rem auto; display: block; font-size: 1.2rem;">View Music PDF</a>
 																						 <!-- View Music PDF Button after Program Notes -->
 											 <section class="program-notes-section" style="background:rgba(255,255,255,0.78);box-shadow:0 2px 16px #b3e5fc66;border-radius:1.5rem;padding:1.1rem 1.5rem 1.1rem 1.5rem;margin-top:0.2rem;position:relative;z-index:1;backdrop-filter:blur(2px);">
 												 <h2 class="section-title" style="color:#7b3fe4;text-align:center;letter-spacing:0.08em;font-family:'Dancing Script',cursive;font-size:2.1rem;margin-bottom:1.2rem;z-index:1;position:relative;">Program Notes</h2>
