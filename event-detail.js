@@ -254,6 +254,17 @@ window.toggleProgramDetailsAccordion = function() {
         <h1 class="event-detail-title">${event.title}</h1>
         <p class="event-detail-subtitle">${event.subtitle}</p>
         ${event.ticket_link && event.ticket_link !== 'N/A' ? `<a href="${event.ticket_link}" class="magic-garden-btn" target="_blank" rel="noopener noreferrer" style="margin-top:1.2rem;margin-bottom:2.2rem;display:block;max-width:fit-content;margin-left:auto;margin-right:auto;">PURCHASE TICKETS FOR <span class="magic-garden-highlight">${event.title.toUpperCase()}</span> HERE</a>` : ''}
+        <!-- Magic Garden ONLY: Slideshow -->
+        ${(event.title && event.title.trim().toLowerCase() === 'magic garden') ? `
+        <div id="mg-slideshow-section" style="margin:2.5rem auto 2.5rem auto;max-width:600px;text-align:center;">
+            <div id="mg-slideshow-container" style="position:relative;">
+                <img id="mg-slideshow-img" src="magic-garden-files/mg_know-before-you-go/mg_kbyg_1.png" alt="Magic Garden Know Before You Go" style="width:100%;max-width:600px;border-radius:1.2rem;box-shadow:0 4px 32px rgba(140,14,176,0.18);transition:opacity 0.5s;">
+                <button id="mg-slideshow-prev" aria-label="Previous" style="position:absolute;top:50%;left:0.5rem;transform:translateY(-50%);background:#fff0;border:none;border-radius:50%;width:2.5rem;height:2.5rem;font-size:2rem;color:#ff00cc;box-shadow:0 2px 8px #3333ff;cursor:pointer;">&#8592;</button>
+                <button id="mg-slideshow-next" aria-label="Next" style="position:absolute;top:50%;right:0.5rem;transform:translateY(-50%);background:#fff0;border:none;border-radius:50%;width:2.5rem;height:2.5rem;font-size:2rem;color:#ff00cc;box-shadow:0 2px 8px #3333ff;cursor:pointer;">&#8594;</button>
+                <div id="mg-slideshow-indicator" style="position:absolute;bottom:0.5rem;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.85);color:#3333ff;padding:0.3em 1em;border-radius:1em;font-weight:700;font-size:1.1rem;box-shadow:0 2px 8px #ff00cc;">1 / 4</div>
+            </div>
+        </div>
+        ` : ''}
         <div class="event-info-grid">
             ${event.displayDate && event.displayDate !== 'TBD' ? (() => {
                 // Format displayDate as string and handle line breaks
@@ -388,6 +399,77 @@ window.toggleProgramDetailsAccordion = function() {
         if (lightbox) {
             lightbox.style.display = 'none';
         }
+    }
+
+
+    // Magic Garden ONLY: Slideshow logic with auto-scroll that stops on user interaction
+    if (event.title && event.title.trim().toLowerCase() === 'magic garden') {
+        const mgImages = [
+            'magic-garden-files/mg_know-before-you-go/mg_kbyg_1.png',
+            'magic-garden-files/mg_know-before-you-go/mg_kbyg_2.png',
+            'magic-garden-files/mg_know-before-you-go/mg_kbyg_3.png',
+            'magic-garden-files/mg_know-before-you-go/mg_kbyg_4.png',
+        ];
+        let mgCurrent = 0;
+        let mgAutoScroll = true;
+        let mgAutoScrollTimer = null;
+        const mgImg = document.getElementById('mg-slideshow-img');
+        const mgPrev = document.getElementById('mg-slideshow-prev');
+        const mgNext = document.getElementById('mg-slideshow-next');
+        const mgIndicator = document.getElementById('mg-slideshow-indicator');
+
+        function updateMGSlideshow(idx) {
+            mgImg.style.opacity = 0.3;
+            setTimeout(() => {
+                mgImg.src = mgImages[idx];
+                mgImg.style.opacity = 1;
+                mgIndicator.textContent = `${idx + 1} / ${mgImages.length}`;
+            }, 180);
+        }
+
+        function stopAutoScroll() {
+            mgAutoScroll = false;
+            if (mgAutoScrollTimer) {
+                clearInterval(mgAutoScrollTimer);
+                mgAutoScrollTimer = null;
+            }
+        }
+
+        function startAutoScroll() {
+            mgAutoScroll = true;
+            mgAutoScrollTimer = setInterval(() => {
+                if (!mgAutoScroll) return;
+                mgCurrent = (mgCurrent + 1) % mgImages.length;
+                updateMGSlideshow(mgCurrent);
+            }, 10000);
+        }
+
+        mgPrev.addEventListener('click', function(e) {
+            e.stopPropagation();
+            stopAutoScroll();
+            mgCurrent = (mgCurrent - 1 + mgImages.length) % mgImages.length;
+            updateMGSlideshow(mgCurrent);
+        });
+        mgNext.addEventListener('click', function(e) {
+            e.stopPropagation();
+            stopAutoScroll();
+            mgCurrent = (mgCurrent + 1) % mgImages.length;
+            updateMGSlideshow(mgCurrent);
+        });
+        mgImg.addEventListener('click', function() {
+            stopAutoScroll();
+            mgCurrent = (mgCurrent + 1) % mgImages.length;
+            updateMGSlideshow(mgCurrent);
+        });
+
+        // Stop auto-scroll on any user interaction (touch, mouse, keyboard)
+        [mgImg, mgPrev, mgNext].forEach(el => {
+            el.addEventListener('mousedown', stopAutoScroll);
+            el.addEventListener('touchstart', stopAutoScroll);
+            el.addEventListener('keydown', stopAutoScroll);
+        });
+
+        startAutoScroll();
     }
 
     // Program Details: fetch and display if needed
