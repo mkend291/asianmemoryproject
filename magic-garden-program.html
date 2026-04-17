@@ -372,8 +372,8 @@ We formed Part II around “Waltz for Stark and Fern” as a nod to evolving sym
 	</footer>
 		<script src="script.js"></script>
 		<!-- Bio Modal Popup -->
-		<div id="bioModal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;">
-			<div id="bioModalContent" style="background:#fff;border-radius:1.5rem;box-shadow:0 4px 32px #b3e5fc,0 2px 8px #f8bbd0;max-width:95vw;max-height:90vh;width:370px;padding:2.2rem 1.2rem 1.5rem 1.2rem;display:flex;flex-direction:column;align-items:center;position:relative;overflow:auto;">
+		<div id="bioModal">
+		<div id="bioModalContent">
 				<span id="bioModalClose" style="position:absolute;top:1.2rem;right:1.5rem;font-size:2.5rem;color:#7b3fe4;cursor:pointer;font-family:sans-serif;z-index:10001;">&times;</span>
 				<img id="bioModalImg" src="" alt="Bio headshot" style="width:140px;height:140px;object-fit:cover;border-radius:1.2rem;border:3.5px solid #7b3fe4;box-shadow:0 2px 16px #b3e5fc55;background:#e3f2fd;margin-bottom:1.1rem;">
 				<div id="bioModalName" style="font-size:1.3rem;font-weight:700;color:#7b3fe4;font-family:'Dancing Script',cursive;margin-bottom:0.2rem;text-align:center;"></div>
@@ -391,25 +391,30 @@ We formed Part II around “Waltz for Stark and Fern” as a nod to evolving sym
 				const modalRole = document.getElementById('bioModalRole');
 				const modalText = document.getElementById('bioModalText');
 				const modalClose = document.getElementById('bioModalClose');
-				cards.forEach(card => {
-					card.addEventListener('click', function(e) {
-						modal.style.display = 'flex';
-						modalImg.src = card.getAttribute('data-img');
-						modalName.textContent = card.getAttribute('data-name');
-						modalRole.textContent = card.getAttribute('data-role');
-						modalText.innerHTML = card.getAttribute('data-bio');
-						// Copy image style from card to modal for object-fit and object-position
-						const cardImg = card.querySelector('.bio-headshot');
-						if (cardImg) {
-							modalImg.style.objectFit = cardImg.style.objectFit || 'cover';
-							modalImg.style.objectPosition = cardImg.style.objectPosition || '';
-						}
-					});
-				});
+				function openModal(card) {
+					modal.style.display = 'flex';
+					modalImg.src = card.getAttribute('data-img');
+					modalName.textContent = card.getAttribute('data-name');
+					modalRole.textContent = card.getAttribute('data-role');
+					modalText.innerHTML = card.getAttribute('data-bio');
+					// Copy image style from card to modal for object-fit and object-position
+					const cardImg = card.querySelector('.bio-headshot');
+					if (cardImg) {
+						modalImg.style.objectFit = cardImg.style.objectFit || 'cover';
+						modalImg.style.objectPosition = cardImg.style.objectPosition || '';
+					}
+					document.body.classList.add('modal-open');
+				}
 				function closeModal() {
 					modal.style.display = 'none';
 					modalImg.src = '';
+					document.body.classList.remove('modal-open');
 				}
+				cards.forEach(card => {
+					card.addEventListener('click', function(e) {
+						openModal(card);
+					});
+				});
 				modalClose.addEventListener('click', closeModal);
 				modal.addEventListener('click', function(e) {
 					if (e.target === modal) closeModal();
