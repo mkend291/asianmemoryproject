@@ -1872,6 +1872,13 @@ footer {
   pointer-events: none;
 }
 
+/* Fix bio modal cutoff on mobile */
+@media (max-width: 600px) {
+    #bioModalContent {
+        padding-bottom: 3.5rem !important;
+        max-height: 82vh !important;
+    }
+}
 @media (max-width: 600px) {
   .navbar .nav-container {
     flex-direction: column;
