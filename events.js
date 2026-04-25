@@ -131,6 +131,10 @@ document.addEventListener('DOMContentLoaded', function() {
             // Sort upcoming events by eventDate ascending (soonest first)
             upcomingEvents.sort((a, b) => a.eventDate - b.eventDate);
 
+            // If no upcoming events, hide the section
+            if (upcomingEvents.length === 0) {
+                upcomingSection.style.display = 'none';
+            }
             // Render upcoming events
             upcomingEvents.forEach(({ event, eventDate }) => {
                 const card = document.createElement('a');
@@ -165,7 +169,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 upcomingGrid.appendChild(card);
             });
 
-            // Render past events (keep existing order)
+            // Sort past events by eventDate descending (most recent first)
+            pastEvents.sort((a, b) => b.eventDate - a.eventDate);
+            // Render past events
             pastEvents.forEach(({ event, eventDate }) => {
                 const card = document.createElement('a');
                 card.className = 'event-card-link';

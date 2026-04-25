@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (purchaseLink && purchaseLink !== '-') {
                 html += `<div class=\"music-purchase\"><a href=\"${purchaseLink}\" target=\"_blank\" rel=\"noopener noreferrer\">Purchase Here</a></div>`;
             } else {
-                html += `<div class=\"music-purchase\"><em>Available upon request</em></div>`;
+                html += `<div class=\"music-purchase\"><a href=\"requests.html\" class=\"magic-garden-btn\" style=\"font-size:1.08rem;padding:0.6em 1.6em;margin:0;display:inline-block;\">Request</a></div>`;
             }
             html += '</div>';
             list.innerHTML += html;

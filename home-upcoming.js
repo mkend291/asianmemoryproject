@@ -4,6 +4,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     const homeUpcomingGrid = document.getElementById('home-upcoming-grid');
     if (!homeUpcomingGrid) return;
+    // Get the section element to hide if no events
+    const eventsSection = document.querySelector('.events-list-section');
     fetch('events_data.csv?_=' + Date.now())
         .then(res => res.text())
         .then(csv => {
@@ -60,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Sort by soonest
             upcoming.sort((a, b) => new Date(a.sortDate) - new Date(b.sortDate));
             if (upcoming.length === 0) {
-                homeUpcomingGrid.innerHTML = '<p style="color:#fff;text-align:center;">No upcoming events at this time.</p>';
+                if (eventsSection) eventsSection.style.display = 'none';
                 return;
             }
             upcoming.forEach(event => {

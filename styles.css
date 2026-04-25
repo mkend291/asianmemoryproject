@@ -139,8 +139,7 @@
     text-decoration: none;
     transition: background 0.2s, box-shadow 0.2s;
     border: 3px solid #fff;
-    outline: 2px solid #3333ff;
-    outline-offset: -4px;
+    outline: none;
     opacity: 0.9;
 }
 @media (max-width: 600px) {
